@@ -9,11 +9,15 @@ app.get("/", (request, response) => {
   return response.status(234).send("Welcome to Book Store MERN Stack Tutorial");
 });
 
-app.listen(PORT, () => {
-  console.log(`App is listening to port: ${PORT}`); // backtick: ALT + 96
-});
-
 mongoose
   .connect(mondogDBURL)
-  .then(() => {})
-  .catch(() => {});
+  .then(() => {
+    console.log("App connected to database");
+
+    app.listen(PORT, () => {
+      console.log(`App is listening to port: ${PORT}`); // backtick: ALT + 96
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
