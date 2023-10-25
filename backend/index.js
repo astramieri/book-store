@@ -5,6 +5,8 @@ import { Book } from "./models/bookModels.js";
 
 const app = express();
 
+app.use(express.json()); // middleware for parsing request body
+
 app.get("/", (request, response) => {
   console.log(request);
   return response.status(234).send("Welcome to Book Store MERN Stack Tutorial");
@@ -12,10 +14,11 @@ app.get("/", (request, response) => {
 
 app.post("/books", async (request, response) => {
   try {
+    console.log(request.body);
     if (
       !request.body.title ||
       !request.body.author ||
-      request.body.publishYear
+      !request.body.publishYear
     ) {
       return response.status(400).send({
         message: "Send all required fields: title, author, publishYear",
